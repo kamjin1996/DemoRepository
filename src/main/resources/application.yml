@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/mytest?useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+  mapper-locations: classpath:com/zxx/demorepository/test/mapper/*Mapper.xml
+  typeAliasesPackage: com.zxx.demorepository.test.entity
+
+msg: "hello"

@@ -1,9 +1,9 @@
 package com.zxx.demorepository.test.common.impl;
 
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zxx.demorepository.test.common.BaseMapper;
 
 /**
  * @Auther: KAM1996

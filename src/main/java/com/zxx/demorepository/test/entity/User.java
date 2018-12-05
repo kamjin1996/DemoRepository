@@ -1,8 +1,10 @@
 package com.zxx.demorepository.test.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import lombok.*;
 
 /**
  * @Auther: KAM1996
@@ -13,10 +15,14 @@ import lombok.Data;
 
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("t_user")
+@ToString
 public class User {
 
-    @TableField("id")
+    @TableId(value = "id",type = IdType.INPUT)
     private Integer id;
 
     @TableField("username")

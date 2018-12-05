@@ -1,7 +1,7 @@
 package com.zxx.demorepository.test.mapper;
 
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zxx.demorepository.test.common.BaseMapper;
 import com.zxx.demorepository.test.entity.User;
 
 /**

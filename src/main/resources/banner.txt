@@ -1,0 +1,10 @@
+${AnsiColor.BLUE}
+      __         _         __         _
+     / / __     / \       |  \       / \
+    / /   /    / / \      | \ \     / / \
+   / /   /    / / \ \     | |\ \   / / \ \
+  / /  /     / / --\ \    | | \ \ / /   \ \
+ / /\  \    / /     \ \   | |  \ \ /     \ \
+/_/  \__\  /_/       \_\  |_|   \_/       \_\
+ ${AnsiColor.BRIGHT_YELLOW}
+ ::: Spring-Boot ${spring-boot.version}     ::: Halo (version:${application.formatted-version})

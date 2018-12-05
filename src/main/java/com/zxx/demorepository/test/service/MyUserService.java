@@ -4,6 +4,7 @@ package com.zxx.demorepository.test.service;
 
 import com.zxx.demorepository.test.common.BaseService;
 import com.zxx.demorepository.test.entity.User;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface MyUserService extends BaseService<User> {
     List<User> selectUsers();
 
     boolean updateUser(User user);
+
+    boolean updateUser2(User user);
 }

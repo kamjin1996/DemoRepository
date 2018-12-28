@@ -1,5 +1,6 @@
 package com.zxx.demorepository.lambdatest;
 
+import com.google.common.collect.Lists;
 import lombok.Builder;
 import lombok.Data;
 import org.junit.Before;
@@ -22,7 +23,7 @@ import java.util.stream.Stream;
 public class CommonFunTest {
 
     @Before
-    public void before(){
+    public void before() {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
@@ -177,8 +178,18 @@ public class CommonFunTest {
     }
 
     @Test
-    public void streamRunTest(){
+    public void streamRunTest() {
         Stream.iterate(1, item -> item + 1).limit(10).forEach(System.out::println);
+    }
+
+    //Stream流的串行与并行测试,并行（多线程）
+    @Test
+    public void parallelStream() {
+        List<Integer> numList = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
+        //串行
+        numList.stream().forEach(System.out::println); //1,2,3,4,5,6,7,8,9,0
+        //并行
+        numList.parallelStream().forEach(System.out::println);
     }
 
     @Data

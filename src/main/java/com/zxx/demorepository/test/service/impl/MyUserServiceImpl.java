@@ -2,6 +2,7 @@ package com.zxx.demorepository.test.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.EmptyWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.rabbitmq.client.UnblockedCallback;
@@ -48,5 +49,12 @@ public class MyUserServiceImpl extends BaseServiceImpl<UserMapper,User> implemen
     @Override
     public boolean updateUser2(User user) {
         return this.baseMapper.update(user,new UpdateWrapper<User>().like("age",5))>0;
+    }
+
+    public void codeTest(){
+        Wrapper<User> emptyWrapper = new EmptyWrapper<>();
+        Wrapper<User> queryWrapper = new QueryWrapper<>();
+        Wrapper<User> updateWrapper = new UpdateWrapper<>();
+
     }
 }

@@ -1,13 +1,8 @@
 package com.zxx.demorepository;
 
-import com.google.common.collect.Lists;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @auther: kam
@@ -18,11 +13,30 @@ public class PrintTest {
 
     /**
      * 打印：🙅🐞🎁
-     *
      */
     @Test
-    public void character(){
+    public void character() {
         System.out.println("\uD83D\uDE45\uD83D\uDC1E\uD83C\uDF81");
+    }
+
+    /**
+     * 生成1000个6位随机数
+     */
+    @Test
+    public void random() {
+        Set<Integer> nums = new HashSet<>();
+        for (int i = 0; i < 1000; i++) {
+            int random = new Random().nextInt(999999);
+            if (random < 100000) {
+                random += 100000;
+            }
+            nums.add(random);
+        }
+        if (nums.size() == 1000) {
+            for (Integer num : nums) {
+                System.out.println(num);
+            }
+        }
     }
 
 }

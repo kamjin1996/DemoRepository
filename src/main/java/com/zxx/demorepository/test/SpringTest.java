@@ -3,14 +3,12 @@ package com.zxx.demorepository.test;
 import com.zxx.demorepository.test.entity.User;
 import com.zxx.demorepository.test.service.MyUserService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Predicate;
 
 /**
@@ -19,8 +17,6 @@ import java.util.function.Predicate;
  * @Description: junit测试
  * @Version: 1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class SpringTest {
 
     @Value("${msg}")
@@ -47,6 +43,7 @@ public class SpringTest {
         User user = User.builder().age(8).username("李四").build();
         this.myUserService.updateUser2(user);
     }
+
     //查找
     @Test
     public void find() {
@@ -58,8 +55,32 @@ public class SpringTest {
 
     //删除
     @Test
-    public void del(){
+    public void del() {
         this.myUserService.delUser(9);
     }
 
+    private final ReentrantReadWriteLock cacheLock = new ReentrantReadWriteLock(true);
+    private final ReentrantLock lock = new ReentrantLock(true);
+    private final ReentrantReadWriteLock.ReadLock readLock = cacheLock.readLock();
+    private final ReentrantReadWriteLock.WriteLock writeLock = cacheLock.writeLock();
+
+    public static class lockTest {
+
+       public Thread thread1 = new Thread(() -> {
+            for (int a = 1; a <= 100; a++) {
+                System.out.println(Thread.currentThread().getName() + " 第" + a + "次");
+            }
+        }, "线程A");
+
+        public Thread thread2 = new Thread(() -> {
+            for (int a = 1; a <= 10;a++ ) {
+                System.out.println(Thread.currentThread().getName() + " 第" + a + "次");
+            }
+        }, "线程B");
+
+    }
+
+    public static void main(String[] args) {
+
+    }
 }

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -51,6 +52,21 @@ public class CommonFunTest {
             System.out.println(user.getName());
             user.run();
         });
+    }
+
+    @Data
+    @Builder
+    private static class User {
+        private String name;
+
+        public void run() {
+            System.out.println("running...............");
+        }
+
+        @Override
+        public String toString() {
+            return "name:" + name;
+        }
     }
 
     //二。Function接口
@@ -192,18 +208,32 @@ public class CommonFunTest {
         numList.parallelStream().forEach(System.out::println);
     }
 
-    @Data
-    @Builder
-    private static class User {
-        private String name;
+    //BIFunction，接受两个参数做一些操作
+    @Test
+    public void getSum() {
+        //1、
+        BiFunction<Integer, Integer, Integer> sumFun = (c, d) -> c + d;
+        System.out.println(sumFun.apply(10, 9));
 
-        public void run() {
-            System.out.println("running...............");
-        }
+        BiFunction<Integer, Integer, Boolean> booFun = (c, d) -> Objects.equals(c, d);
+        System.out.println(booFun.apply(10, 9));
 
-        @Override
-        public String toString() {
-            return "name:" + name;
-        }
+        System.out.println("---------------------------------------------------------------");
+        BiFunction<Function<Integer, Integer>, Function<Integer, Integer>, Integer> biFunction =
+                (Function<Integer, Integer> a, Function<Integer, Integer> b) -> a.apply(5) - b.apply(6);
+        Integer num = biFunction.apply(a -> 7, b -> 8);
+        System.out.println(num);
+        System.out.println("---------------------------------------------------------------");
+
+        //2、
+        System.out.println(getSum(1, 3, (a, b) -> a * b));
+        System.out.println(getSum(2, 3, (a, b) -> a + b));
+        System.out.println(getSum(10, 3, (a, b) -> a - b));
+        System.out.println(getSum(2, 3, (a, b) -> a / b));
     }
+
+    private <R, U, T> Integer getSum(Integer a, Integer b, BiFunction<Integer, Integer, Integer> fun) {
+        return fun.apply(a, b);
+    }
+
 }

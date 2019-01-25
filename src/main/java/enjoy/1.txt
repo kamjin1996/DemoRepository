@@ -1,0 +1,100 @@
+                                                                                               ..
+                                                                                                .
+                                                                                                .
+                ..::||::.                                                                        
+               :8MMMMMMMM8|:             ....:::::::::::..                                       
+           . .:8MMMMMMMMMMM8:           ..|VV8MMM8888888VV|::.                                  .
+         ....|8MMMMMMMMMMMMMV:.   ..::|V888V|::::..::::::|VVVVV|:           .::|||:..           .
+          .:VMMMMMMMMMMMMMMMMV:.::8MMMM8|:..                .:VMM8:      .:8MMMMMMMMV:.          
+          :VMMMMMMMMMMMMMMMMM88VV8MM8V|:..                   .:V88V|..  .:VMMMMMMMMMMV|.        .
+          VMMMMMMMMMMMMMMMMMMMMMVV:..                          ..:VV8||.:8MMMMMMMMMMMMMV.       .
+         .8MMMMMMMMMMMMMMMMMMM8: .                                ..|VVV8MMMMMMMMMMMMMMMV:      .
+         :MMMMMMMMMMMMMMMMMMMM|                                  .   :|VMMMMMMMMMMMMMMMMMV.     .
+         :MMMMMMMMMMMMMMMMMMMV:                                       .:8MMMMMMMMMMMMMMMMM|      
+         |MMMMMMMMMMMMMMMMMMM:.                                        .|MMMMMMMMMMMMMMMMM8.     
+         |MMMMMMMMMMMMMMMMMM8..                                        ..8MMMMMMMMMMMMMMMMM.     
+         VMMMMMMMMMMMMMMMMM8:                                           .:VMMMMMMMMMMMMMMMM:     
+         VMMMMMMMMMMMMMMMM|:                                             .:8MMMMMMMMMMMMMMM|.    
+         VMMMMMMMMMMMMMMMV.                                               .|MMMMMMMMMMMMMMMV.   .
+         VMMMMMMMMMMMMMMM: .                                             ...8MMMMMMMMMMMMMM8:    
+         |MMMMMMMMMMMMMM|  .                                            ....V8MMMMMMMMMMMMM8:    
+         |MMMMMMMMMMMMM8:                                                ...:VMMMMMMMMMMMMM8:    
+         :MMMMMMMMMMMM8|.                                                ....:8MMMMMMMMMMMM8:   .
+          VMMMMMMMMMMM|.                                                   .  VMMMMMMMMMMMMV.   .
+          :8MMMMMMMMMM:                  .............                        |MMMMMMMMMMMM|.   .
+          .|MMMMMMMMM8.                .::||VVVVVVVV|:..      ..:::..         :MMMMMMMMMMMM:    .
+           .|MMMMMMMM|                .:V8MMMMMMMMMMM8|:.     .||VVVV:.       .VMMMMMMMMMM8.    .
+            .V8MMMMMM|               .:|VMMMMMMMMMMMM88|.    .:|V88MM8V|.      |MMMMMMMMMMV     .
+            .|VMMMMM8:               .::|V8888888MMM888|:.    :|VV88MMMV:      :8MMMMMMMM8|      
+              .|8MMV|.               .::::::::.::|VVV88V|:.  .:|||||V8M88|.    .|MMMMMMM|:.      
+                .:V:.               ..::...       .||V88V|...:|||||||||V88V:.   .8MMMM8|         
+                .:V.                ..::...       .||VVVV|..::||||:::::||VV:    .VMMMV|.         
+                .|:                  .::..::||V||||||||||:. :::::....  .:::.     |8V:.           
+                :V.                  .:::::|8MMMM8M|:.:::.  .::::.     . ...     :V|             
+               .|V                   .:::::|V8888M8|. ....  ..::||..... ....     .V|.            
+               .V|                 ..:::::::::::|V|.         ..:|V888V:..        .V8V.           
+               :V:                ..:|||::::::::::.          .::|VMMMMV:..        |M8.           
+               ||.                .::|:::::::||::.          ..:::|V8M8V:..        |MM.           
+              .V:                 ...........:::.           ..:::::|V||:.         :8M:           
+              :V..      .   ....                            .....:::::...         :8M:           
+             .|8.      .:..  ...                              ....::::::.         :8M:           
+             .|V.      .:.   ....                                ........         .VM:.          
+             :VV        ..   .....                               ...              .|M|.          
+             :8|        .    .....                               ...               :8|.          
+             |8|                ..               ....           .:::.              :VV.          
+           .:88:                              .::::..            .::..             .VV:         .
+          .:VM8:                             .:||:..              ..:....           V8|.         
+         .VMMM8.                        ...::|||:........      ....:::::.           |M8:         
+        .8MMMMV.                      ..::|VVV|:. .::|||V||||||VV|||V||::.          |MM8.        
+       .|MMMMM|.                      ..:||V88|.. ..:|88888VVV8M8V||V||::.          |MMM|        
+      .|MMMMMM|.                      ..:|V8V|:.. ....|V8MMMMMMMV:.:V||:.           |MMMV..      
+      :8MMMMMMV.                      ..:|VV:.....   . .:V88M8V|.  .:||..          .|MMM8|:      
+      .8MMMMMM8:                       ..:|:..          .::::.       ...            |MMMMMV      
+      .8MMMMMMM|                        .:::..         ..::..                       |MMMMM8.     
+      .8MMMMMMMV                        ...:...       ..:..             .          .VMMMMMM|     
+      .8MMMMMMM8.                        ..::||:::::..::..   ....                 .|MMMMMMM8:   .
+      .8MMMMMMMM:                        ..::||VVVVV||VV||::::||||:...            .VMMMMMMMMV:   
+      .8MMMMMMMMV.                       ...::VV88MM888M8VVVV8MMM8|:..            .VMMMMMMMMM|  .
+      .8MMMMMMMM8:                       ...::::::||||||||||V8MM8|:...            :8MMMMMMMMMV   
+      .8MMMMMMMMMV:                      ...:::..  .........::VV:......       .   |8MMMMMMMMM8.  
+      .MMMMMMMMMMM8:.                    ...::.......         .     .....    ..  VMMMMMMMMMMMM:  
+      .MMMMMMMMMMMMM8:                   ....:.  .:::..             .::..    . .|MMMMMMMMMMMMMV..
+      .MMMMMMMMMMMMMM8:                  ......  .::::::...    ...  .::..    ..|8MMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMM8V:.               ....::.. ...:|V8VV|||VVV|  ....      |MMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMM8:               .....:...    .|V8MMMMM8V:  ..   .  .:8MMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMV..             .....:...    .:V8MMMMM8V.       ...|VMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMV|.             ....:...     ..V8M888|:       ..:VMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMM|.             . ....     ...:|V|::.       .:V8MMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMM8|:               ...      ..::|::....  ..:|8MMMMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMMMMMV||::          ...   .     ......:||V8MMMMMMMMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMV:            .......   ..:V8MMMMMMMMMMMMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8:.         ............:V8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8V||:::..:|VV||VVVV88MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8:.
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8: 
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8: 
+      .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8: 
+                                                                      .                         .
+                            .                                                                   .
+                     VM.:   M        V  8 V    . M     |   :M     .V:::.   V M                  .
+                   :M M V  .MMM 8MM  M888V8V  .: M  .  .       V8M 8  V 8MVMMMM:                .
+                  .MM8MMMV :.M   .M    8MM8   M  M    8 8MMMMM ..8 8 .8 8.|M M                  .
+                    M.M .    M    M 8M M..:   :  M    .M        MM 8|:8 |||8MMM                 .
+                  ..M8|:M   .M    M  M M  .  ..MMMMM   : MMMM    | 8M:M .M V.8.                 .
+                  . M .M     88.  M  M M  .      M     M M  M   MV 8::. : M8 8                  .
+                    M MV.V  | : MMM  M M888   .  M  . .M M  M  M.  V M  M .V|M::                .
+                   M|   |V .|     : |.|MMMMM  .     . V: M  M     .|  |    M   .                .
+                           .                                                                    .
+                                          .                                                     .
+                                                           .                                    .
+          .         | ..|    :M  M    8: 8M8.     M       :         ||:. .  M.M   :.            .
+          888888M8  M        8.M M    M  . |   .. M       |     8MM.    .MM M.|.: MMMMM8MM      .
+          .MMMM M        V.  M M.M8  VMV.M.8   M  MM8  MMMMMMM:   M MM8 . . M M       :8        .
+           M  M M  MM  M|   MMMM M    :  M M  8M| M V     8:     V..|:|  M|VMMMM|    :M         .
+           M  M M   M   M   |M M M     | MMMM .M  M M     MM     8   M.   M 8 M      :M         .
+           M8MM M   M VM M   M M M8   MM   .M  M  MMV    M..|    MM  MM  8:.8:M|:    .M         .
+           V    M   M . .    M M . M  M..   8  M     M  8.V 8M  M   . M  |. M|M|::.. :M         .
+               :M  M:88MMMM  M MMMMV 8     ||  8M8V8MM V8  : |8 .   M  M    M.:. .:: .8         .
+                             .                                                 ...  .           .
+                                                                                 .              .
+                                                                                                .
+                                                                                               ..

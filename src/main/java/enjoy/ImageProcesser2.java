@@ -65,23 +65,29 @@ public class ImageProcesser2 {
         if (!imageFile.exists()) {
             log.error("File is not exists!");
         }
-        StringBuffer sb = new StringBuffer();
         try {
-            //将图片文件装载如BufferedImage流
-            BufferedImage buff = compressImage(ImageIO.read(imageFile));
-
-            // 逐行扫描图像的像素点，读取RGB值，取其平均值，并从charset中获取相应的字符素材，并装载到sb中
-            for (int x = 0; x < buff.getWidth(); x++) {
-                for (int y = 0; y < buff.getHeight(); y++) {
-                    sb.append(charset[(getRgbValue(buff, x, y) * charset.length - 1) / 255] + "");
-                }
-                sb.append("\r\n");
-            }
+            //将图片文件装载入BufferedImage流
+            imgString = this.scanWithGetBuff(new StringBuffer(), compressImage(ImageIO.read(imageFile))).toString();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        imgString = sb.toString();
         return this;
+    }
+
+    /**
+     * 逐行扫描图像的像素点，读取RGB值，取其平均值，并从charset中获取相应的字符素材，并装载到sb中
+     *
+     * @param buff
+     * @return
+     */
+    private StringBuffer scanWithGetBuff(StringBuffer sb, BufferedImage buff) {
+        for (int x = 0; x < buff.getWidth(); x++) {
+            for (int y = 0; y < buff.getHeight(); y++) {
+                sb.append(charset[(getRgbValue(buff, x, y) * charset.length - 1) / 255] + "");
+            }
+            sb.append("\r\n");
+        }
+        return sb;
     }
 
     /**
@@ -96,7 +102,12 @@ public class ImageProcesser2 {
         return (color.getRed() + color.getGreen() + color.getBlue()) / 3;
     }
 
-    /* 图像文件预处理:将图片压缩到 最长边为 100px */
+    /**
+     * 图像文件预处理:将图片压缩到 最长边为 100px
+     *
+     * @param srcImg
+     * @return
+     */
     private BufferedImage compressImage(BufferedImage srcImg) {
         int h = srcImg.getHeight();
         int w = srcImg.getWidth();
@@ -106,9 +117,9 @@ public class ImageProcesser2 {
         int newH = w > h ? 100 * h / w : 100;
         int newW = w < h ? 100 * w / h : 100;
         BufferedImage smallImg = new BufferedImage(newW, newH, srcImg.getType());
-        Graphics g = smallImg.getGraphics();
-        g.drawImage(srcImg, 0, 0, newW, newH, null);
-        g.dispose();
+        Graphics graphics = smallImg.getGraphics();
+        graphics.drawImage(srcImg, 0, 0, newW, newH, null);
+        graphics.dispose();
         return smallImg;
     }
 
@@ -129,27 +140,30 @@ public class ImageProcesser2 {
         }
     }
 
+    private void batchImgFile(String srcFile,String traget){
+
+    }
+
     /**
      * 批处理图像文件
      *
-     * @param srcfile
-     * @param tragetfile
-     * @throws FileNotFoundException
+     * @param srcFolder
+     * @param tragetFolder
      */
-    public void batchImgFile(String srcfile, String tragetfile) {
-        File srcFolder = new File(srcfile);
-        File tragetFolder = new File(tragetfile);
+    public void batchImgFile(File srcFolder, File tragetFolder) {
+        //check or create
         if (!tragetFolder.exists() ||
                 !tragetFolder.isDirectory()) {
             tragetFolder.mkdirs();
         }
+
         ImageProcesser2 processer = new ImageProcesser2();
         ArrayList<File> fileList = Lists.newArrayList(srcFolder.listFiles());
         fileList.stream()
                 .filter(file -> !file.isFile())
                 .forEach(file -> {
                     processer.toBitmapConvert(file);
-                    processer.saveAsTxt(tragetfile + "/" + file.getName() + ".txt");
+                    processer.saveAsTxt(tragetFolder.getName() + "/" + file.getName() + ".txt");
                 });
         log.error("All img were converted!");
     }

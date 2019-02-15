@@ -140,30 +140,36 @@ public class ImageProcesser2 {
         }
     }
 
-    private void batchImgFile(String srcFile,String traget){
-
+    /**
+     * 批处理图像文件
+     *
+     * @param srcFolder
+     * @param targetFolder
+     */
+    private void batchImgFile(String srcFolder, String targetFolder) {
+        batchImgFile(new File(srcFolder), new File(targetFolder));
     }
 
     /**
      * 批处理图像文件
      *
-     * @param srcFolder
-     * @param tragetFolder
+     * @param srcFile
+     * @param tragetFile
      */
-    public void batchImgFile(File srcFolder, File tragetFolder) {
+    public void batchImgFile(File srcFile, File tragetFile) {
         //check or create
-        if (!tragetFolder.exists() ||
-                !tragetFolder.isDirectory()) {
-            tragetFolder.mkdirs();
+        if (!tragetFile.exists() ||
+                !tragetFile.isDirectory()) {
+            tragetFile.mkdirs();
         }
 
         ImageProcesser2 processer = new ImageProcesser2();
-        ArrayList<File> fileList = Lists.newArrayList(srcFolder.listFiles());
+        ArrayList<File> fileList = Lists.newArrayList(srcFile.listFiles());
         fileList.stream()
                 .filter(file -> !file.isFile())
                 .forEach(file -> {
                     processer.toBitmapConvert(file);
-                    processer.saveAsTxt(tragetFolder.getName() + "/" + file.getName() + ".txt");
+                    processer.saveAsTxt(tragetFile.getName() + "/" + file.getName() + ".txt");
                 });
         log.error("All img were converted!");
     }

@@ -3,6 +3,7 @@ package com.zxx.demorepository.execbat;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.SocketUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,29 +18,29 @@ import java.util.List;
  */
 public class ExecBatTest {
 
-    private static final String cmd = "cmd /c start /b";
+    private static final String CMD = "cmd /c start /b";
 
-    private static final String path = (ClassLoader.getSystemResource("") + "test1.bat").replace("file:/", "");
+    private static final String PATH = (ClassLoader.getSystemResource("") + "test1.bat").replace("file:/", "");
 
     private StringBuilder bat;
 
-    private static final List<String> params = Lists.newArrayList("111", "12", "14", "156");
+    private static final List<String> PARAMS = Lists.newArrayList("111", "12", "14", "156");
 
     public void init() {
-        System.out.println(path);
+        System.out.println(PATH);
         bat = new StringBuilder();
-        if (StringUtils.isNotBlank(cmd)) {
-            bat.append(cmd);
+        if (StringUtils.isNotBlank(CMD)) {
+            bat.append(CMD);
             bat.append(" ");
         }
 
-        if (StringUtils.isNotBlank(path)) {
-            bat.append(path);
+        if (StringUtils.isNotBlank(PATH)) {
+            bat.append(PATH);
             bat.append(" ");
         }
 
-        if (!CollectionUtils.isEmpty(params)) {
-            for (String param : params) {
+        if (!CollectionUtils.isEmpty(PARAMS)) {
+            for (String param : PARAMS) {
                 bat.append(param);
                 bat.append(" ");
             }

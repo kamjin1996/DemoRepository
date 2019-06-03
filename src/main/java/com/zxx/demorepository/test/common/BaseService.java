@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Description: 基础服务接口
  * @Version: 1.0
  */
-public interface BaseService<T> extends IService<T> {
+public interface BaseService<T extends BaseModel> extends IService<T> {
 
 }

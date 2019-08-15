@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date: 11:26 2019-06-26
  * @description:
  */
-@Component
+//@Component
 public class OrderRun implements CommandLineRunner, ApplicationContextAware {
 
     private ApplicationContext applicationContext;

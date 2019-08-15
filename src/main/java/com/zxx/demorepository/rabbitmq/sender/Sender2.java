@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
  * @date: 15:28 2018-11-22
  * @description: 发送者2
  */
-@Component
-public class Sender2 {
+public abstract class Sender2 extends SenderAble {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void send(){
-        rabbitTemplate.convertAndSend("queue.2","i am sender2!~");
+    @Override
+    public void send() {
+        rabbitTemplate.convertAndSend("queue.2", "i am sender2!~");
     }
 }

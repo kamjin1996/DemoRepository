@@ -29,4 +29,8 @@ public interface MyUserService extends BaseService<User> {
     boolean updateUser(User user);
 
     boolean updateUser2(User user);
+
+    User findById(Integer id);
+
+    User findByAgeAndName(Integer id, String userName);
 }

@@ -13,7 +13,6 @@ public class Person {
     private String id;
     private String name;
     private int age;
-
     public Person(String id, String name) {
         this.id = id;
         this.name = name;

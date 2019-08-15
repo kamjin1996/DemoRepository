@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @date: 11:10 2019-06-26
  * @description: 应用启动后自动运行内容测试
  */
-@Component
+//@Component
 public class AutoRun implements CommandLineRunner {
 
     @Override

@@ -7,6 +7,8 @@ package com.zxx.demorepository.lambdatest;
  * @Version: 1.0
  */
 public class Calculator {
+
+    @FunctionalInterface
     interface IntegerMath {
         int operation(int a, int b);
     }
@@ -21,10 +23,10 @@ public class Calculator {
         IntegerMath addition = (a, b) -> a + b;
         IntegerMath subtraction = (a, b) -> a - b;
         System.out.println(
-                calculator.operatBinary(10,20,addition)
+                calculator.operatBinary(10, 20, addition)
         );
         System.out.println(
-                calculator.operatBinary(10,20,subtraction)
+                calculator.operatBinary(10, 20, subtraction)
         );
     }
 }

@@ -11,6 +11,7 @@ package GOF.ConstructionSchema.Decorator;
 要求装饰对象和被装饰对象实现同一个接口，装饰对象持有被装饰对象的实例
 Source类是被装饰类，Decorator类是一个装饰类，可以为Source类动态的添加一些功能
 */
+@FunctionalInterface
 public interface Sourceable {
     void method();
 }

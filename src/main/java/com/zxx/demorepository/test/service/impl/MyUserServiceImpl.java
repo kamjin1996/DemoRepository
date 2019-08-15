@@ -1,11 +1,8 @@
 package com.zxx.demorepository.test.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.EmptyWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.rabbitmq.client.UnblockedCallback;
 import com.zxx.demorepository.test.common.impl.BaseServiceImpl;
 import com.zxx.demorepository.test.entity.User;
 import com.zxx.demorepository.test.mapper.UserMapper;
@@ -51,10 +48,21 @@ public class MyUserServiceImpl extends BaseServiceImpl<UserMapper,User> implemen
         return this.baseMapper.update(user,new UpdateWrapper<User>().like("age",5))>0;
     }
 
+    @Override
+    public User findById(Integer id) {
+        return this.baseMapper.selectById(id);
+    }
+
+    @Override
+    public User findByAgeAndName(Integer age, String userName) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",userName);
+        wrapper.eq("age",age);
+        return this.baseMapper.selectOne(wrapper);
+    }
+
     public void codeTest(){
-        Wrapper<User> emptyWrapper = new EmptyWrapper<>();
         Wrapper<User> queryWrapper = new QueryWrapper<>();
-        Wrapper<User> updateWrapper = new UpdateWrapper<>();
 
     }
 }

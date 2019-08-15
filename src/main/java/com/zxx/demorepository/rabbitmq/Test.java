@@ -1,6 +1,6 @@
 package com.zxx.demorepository.rabbitmq;
 
-import com.zxx.demorepository.rabbitmq.sender.Sender1;
+import com.zxx.demorepository.rabbitmq.sender.SenderAble;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,11 +24,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Test {
 
     @Autowired
-    private Sender1 sender1;
+    private SenderAble senderAble;
 
     @org.junit.Test
     public void sender1Test(){
-        this.sender1.send();
+        this.senderAble.send();
     }
 
 }

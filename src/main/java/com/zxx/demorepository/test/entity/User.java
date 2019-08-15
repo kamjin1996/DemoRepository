@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zxx.demorepository.test.common.BaseModel;
+import com.zxx.demorepository.test.intercept2.annotation.CryptField;
 import lombok.*;
 
 /**
@@ -26,9 +27,11 @@ public class User extends BaseModel {
     @TableId(value = "id",type = IdType.INPUT)
     private Integer id;
 
+    @CryptField
     @TableField("username")
     private String username;
 
+    @CryptField
     @TableField("password")
     private String password;
 

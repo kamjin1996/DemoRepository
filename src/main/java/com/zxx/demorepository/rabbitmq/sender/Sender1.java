@@ -10,13 +10,15 @@ import org.springframework.stereotype.Component;
  * @description: 发送者1
  */
 @Component
-public class Sender1 {
+public abstract class Sender1 extends SenderAble {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
     String msg = "i am sender1!~";
-    public void send(){
-        rabbitTemplate.convertAndSend("queue.1",msg);
+
+    @Override
+    public void send() {
+        rabbitTemplate.convertAndSend("queue.1", msg);
     }
 
 }

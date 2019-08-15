@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableScheduling
 @EnableAsync
 @MapperScan("com.zxx.demorepository.test.mapper")

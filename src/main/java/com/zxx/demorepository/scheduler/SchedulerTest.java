@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * @date: 14:14 2018-11-22
  * @description: SpringBoot的定时任务使用
  */
-@Service
+//@Service
 public class SchedulerTest {
     //1、在启动类注解:@EnbaleScheduling
     private int count = 0;

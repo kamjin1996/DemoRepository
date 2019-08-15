@@ -4,8 +4,20 @@ spring:
     username: root
     password: 123
     url: jdbc:mysql://localhost:3306/mytest?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#  rabbitmq:
+#    host: 127.0.0.1
+#    username: guest
+#    password: guest
+#    connection-timeout: 5000ms
+#    port: 5672
+
 mybatis-plus:
   mapper-locations: classpath:\test\mapper\*Mapper.xml
   typeAliasesPackage: com.zxx.demorepository.test.entity
 
 msg: "hello i am a msg!"
+
+DbCrypt:
+  enable: true
+  secretKey: "123456789012345678901234"
+

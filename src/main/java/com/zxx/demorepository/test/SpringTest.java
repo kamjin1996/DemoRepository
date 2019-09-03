@@ -286,4 +286,21 @@ public class SpringTest {
     // not find
     return null;
   }
+
+  @Test
+  public void ss(){
+    try{
+      String value = "1";
+      Integer integer = Integer.valueOf(value);
+      System.out.println(integer);
+    } catch (NumberFormatException e){
+      System.out.println("转换异常");
+    }
+  }
+
+  @Test
+  public void longToString(){
+    Long value =1000L;
+    System.out.println(value.toString());
+  }
 }

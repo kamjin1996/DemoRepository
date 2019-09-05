@@ -3,8 +3,7 @@ package com.zxx.demorepository.utils.xml;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.tsign.offstandard.model.pojo.*;
-import com.tsign.offstandard.util.conventor.NullConverter;
+
 
 /**
  * @auther: tuosen
@@ -21,11 +20,11 @@ public class XmlUtil {
         return (T) newInstanceIsFromXml().fromXML(xmlStr);
     }
 
-    private static Class[] enableAnnotationTargetClzs = new Class[]{BizBody.class, BizHeader.class,
-            CreateImgBizBody.class, CreateImgResponse.class, CreateSealBizBody.class, CreateSealResponse.class,
-            DeletebizBody.class, DeleteResponse.class, Request.class, SysHeader.class};
-
-    private static Class[] valueIsNullStillOutputToXmlClzs = new Class[]{BizHeader.class, SysHeader.class};
+    //private static Class[] enableAnnotationTargetClzs = new Class[]{BizBody.class, BizHeader.class,
+    //        CreateImgBizBody.class, CreateImgResponse.class, CreateSealBizBody.class, CreateSealResponse.class,
+    //        DeletebizBody.class, DeleteResponse.class, Request.class, SysHeader.class};
+    //
+    //private static Class[] valueIsNullStillOutputToXmlClzs = new Class[]{BizHeader.class, SysHeader.class};
 
     private static XStream newInstanceIsToXml() {
         XStream xStream = newInstance();
@@ -39,14 +38,15 @@ public class XmlUtil {
 
     private static XStream newInstance() {
         XStream xStream = new XStream(new DomDriver());
-        xStream.processAnnotations(enableAnnotationTargetClzs);
+        //xStream.processAnnotations(enableAnnotationTargetClzs);
         return xStream;
     }
 
     private static Converter getNullConverter() {
-        NullConverter nullConverter = new NullConverter();
-        nullConverter.regAttribute(valueIsNullStillOutputToXmlClzs);
-        return nullConverter;
+        //NullConverter nullConverter = new NullConverter();
+        //nullConverter.regAttribute(valueIsNullStillOutputToXmlClzs);
+        //return nullConverter;
+        return null;
     }
 
 }

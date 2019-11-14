@@ -5,12 +5,10 @@ import com.zxx.demorepository.test.entity.User;
 import com.zxx.demorepository.test.service.MyUserService;
 import lombok.Data;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
@@ -28,7 +26,6 @@ import java.util.stream.Collectors;
 
 /** @Auther: KAM1996 @Date: 15:52 2018-10-18 @Description: junit测试 @Version: 1.0 */
 @MapperScan("com.zxx.demorepository.test.mapper")
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringTest {
 

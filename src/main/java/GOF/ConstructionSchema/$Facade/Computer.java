@@ -27,9 +27,9 @@ public class Computer {
     //电脑关闭
     public void shutdown(){
         System.out.println("shutdown the computer!");
-        cpu.shutdown();
-        memory.shutdown();
         disk.shutdown();
+        memory.shutdown();
+        cpu.shutdown();
         System.out.println("shutdown computer finish!");
     }
 }

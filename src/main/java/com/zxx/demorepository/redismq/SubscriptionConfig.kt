@@ -3,7 +3,12 @@ package com.zxx.demorepository.redismq
 import com.zxx.demorepository.redismq.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
+import org.springframework.data.redis.connection.*
+import org.springframework.data.redis.connection.stream.*
+import org.springframework.data.redis.serializer.*
 import org.springframework.data.redis.stream.*
+import org.springframework.data.redis.stream.Subscription
+import java.time.*
 
 /**
  * <p>
@@ -29,14 +34,29 @@ object MqConst {
     const val consumer3 = "consumer3"
 }
 
+typealias Container = StreamMessageListenerContainer<String, *>
+
 @Configuration
 class SubscriptionConfig(
     @Autowired
     override var redisStreamUtil: RedisStreamUtil
 ) : AbsSubscriptionConfig() {
 
+    @Bean
+    fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<*, *> {
+        val options = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
+            .builder()
+            .pollTimeout(Duration.ofSeconds(1))
+            .serializer(StringRedisSerializer())
+            .build()
+        val container: StreamMessageListenerContainer<*, *> =
+            StreamMessageListenerContainer.create(factory, options)
+        container.start()
+        return container
+    }
+
     @Autowired
-    lateinit var container: StreamContainer
+    lateinit var userMsgListenerContainer: StreamMessageListenerContainer<String, MapRecord<String,String,User>>
 
     /**
      * 订阅者1，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费
@@ -44,7 +64,7 @@ class SubscriptionConfig(
     @Bean
     fun subscription(listenerMessage: ListenerMessage1): Subscription {
         return listenerMessage.registrySubscription(
-            container, MqConst.stream1,
+            userMsgListenerContainer, MqConst.stream1,
             MqConst.group2,
             MqConst.consumer2
         )
@@ -58,7 +78,7 @@ class SubscriptionConfig(
         listenerMessage: ListenerMessage2
     ): Subscription {
         return listenerMessage.registrySubscription(
-            container,
+            userMsgListenerContainer,
             MqConst.stream1,
             MqConst.group2,
             MqConst.consumer2
@@ -73,7 +93,7 @@ class SubscriptionConfig(
         listenerMessage: ListenerMessage3
     ): Subscription {
         return listenerMessage.registrySubscription(
-            container,
+            userMsgListenerContainer,
             MqConst.stream1,
             MqConst.group2,
             MqConst.consumer3
@@ -92,7 +112,7 @@ class SubscriptionConfig(
         listenerMessage: ListenerMessage2
     ): Subscription {
         return listenerMessage.registrySubscription(
-            container,
+            userMsgListenerContainer,
             MqConst.stream1,
             MqConst.group2,
             MqConst.consumer1

@@ -1,5 +1,6 @@
 package com.zxx.demorepository.redismq.config
 
+import cn.hutool.core.bean.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.redis.connection.stream.*
 import org.springframework.data.redis.core.*
@@ -7,6 +8,7 @@ import org.springframework.stereotype.*
 import io.lettuce.core.RedisCommandExecutionException
 
 import io.lettuce.core.RedisBusyException
+import org.checkerframework.checker.units.qual.*
 import org.slf4j.*
 
 import org.springframework.data.redis.RedisSystemException
@@ -70,19 +72,16 @@ class RedisStreamUtil {
 
     /**
      * 追加消息
-     * @param key
-     * @param field
-     * @param value
-     * @return
      */
-    fun add(key: String, field: String, value: Any?): String? {
-        val content = mutableMapOf<String, Any?>()
-        content.put(field, value)
-        return add(key, content)
-    }
-
     fun add(key: String, content: MutableMap<String, Any?>): String? {
         return redisTemplate.opsForStream<String, Any?>().add(key, content)?.value
+    }
+
+    /**
+     * 追加消息
+     */
+    fun add(content: Record<String, Any?>): String? {
+        return redisTemplate.opsForStream<String, Any?>().add(content)?.value
     }
 
     /**
@@ -106,24 +105,36 @@ class RedisStreamUtil {
     }
 
     /**
-     * 从开始读
-     * @param key
-     * @return
+     * 从指定的ID开始读
+     * 如果[recordId]为空则从开始读
+     *
      */
-    fun read(key: String): MutableList<MapRecord<String, String, Any>> {
-        return redisTemplate.opsForStream<String, Any?>().read(StreamOffset.fromStart(key))
-            ?: mutableListOf()
+    fun <K> read(objCls: Class<K>, key: String, recordId: String? = null): MutableList<ObjectRecord<String, K>> {
+        return redisTemplate.opsForStream<String, Any?>()
+            .read(objCls, StreamOffset.from(ObjectRecord.create(key, mutableMapOf<String, Any?>())
+                .apply {
+                    if (recordId?.isNotBlank() == true) {
+                        this.withId(RecordId.of(recordId))
+                    }
+                }
+            ))
     }
 
     /**
      * 从指定的ID开始读
+     * 如果[recordId]为空则从开始读
      * @param key
      * @param recordId
      * @return
      */
-    fun read(key: String, recordId: String): MutableList<MapRecord<String, String, Any>> {
+    fun read(key: String, recordId: String? = null): MutableList<MapRecord<String, String, Any>> {
         return redisTemplate.opsForStream<String, Any?>()
-            .read(StreamOffset.from(MapRecord.create(key, mutableMapOf<String, Any?>()).withId(RecordId.of(recordId))))
-            ?: mutableListOf()
+            .read(StreamOffset.from(MapRecord.create(key, mutableMapOf<String, Any?>())
+                .apply {
+                    if (recordId?.isNotBlank() == true) {
+                        this.withId(RecordId.of(recordId))
+                    }
+                }
+            )) ?: mutableListOf()
     }
 }

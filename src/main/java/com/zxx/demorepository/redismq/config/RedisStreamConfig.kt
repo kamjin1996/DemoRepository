@@ -1,41 +1,7 @@
-package com.zxx.demorepository.redismq
+package com.zxx.demorepository.redismq.config
 
-import com.zxx.demorepository.redismq.config.*
-import org.springframework.context.annotation.*
-import org.springframework.data.redis.stream.StreamMessageListenerContainer.StreamMessageListenerContainerOptions
-import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.stream.*
 import org.springframework.data.redis.stream.*
-import java.time.*
-
-/**
- * redis stream 配置（redis5.0以上）
- */
-@Configuration
-class RedisStreamConfig {
-
-    @Bean
-    fun streamMessageListenerContainerOptions(): StreamMessageListenerContainerOptions<String, *> {
-        return StreamMessageListenerContainerOptions
-            .builder()
-            .pollTimeout(Duration.ofSeconds(1))
-            .build()
-    }
-
-    @Bean
-    fun streamMessageListenerContainer(
-        factory: RedisConnectionFactory,
-        streamMessageListenerContainerOptions: StreamMessageListenerContainerOptions<String?, *>?
-    ): StreamMessageListenerContainer<*, *> {
-        val listenerContainer: StreamMessageListenerContainer<*, *> =
-            StreamMessageListenerContainer.create(factory, streamMessageListenerContainerOptions)
-        listenerContainer.start()
-        return listenerContainer
-    }
-}
-
-typealias BaseStreamListener = StreamListener<String, MapRecord<String, String, String?>>
-typealias StreamContainer = StreamMessageListenerContainer<String, MapRecord<String, String, String?>>
 
 abstract class AbsSubscriptionConfig {
 

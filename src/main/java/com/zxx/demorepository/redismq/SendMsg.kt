@@ -1,8 +1,10 @@
 package com.zxx.demorepository.redismq
 
+import cn.hutool.core.bean.*
 import com.zxx.demorepository.redismq.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.*
+import org.springframework.data.redis.connection.stream.*
 import org.springframework.stereotype.*
 import java.util.*
 import kotlin.concurrent.*
@@ -16,7 +18,10 @@ class SendMsg : CommandLineRunner {
     override fun run(vararg args: String?) {
         var count = 0
         Timer().schedule(timerTask {
-            redisStreamUtil.add(MqConst.stream1, "name", "张三${count++}")
+            count++
+            redisStreamUtil.add(ObjectRecord.create(MqConst.stream1, User("zhangsan$count")))
         }, 3000L, 2000L)
     }
 }
+
+data class User(val name: String)

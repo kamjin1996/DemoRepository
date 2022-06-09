@@ -2,16 +2,11 @@ package com.zxx.demorepository.redismq
 
 import com.zxx.demorepository.redismq.config.*
 import org.slf4j.*
-import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
 import org.springframework.data.redis.connection.*
 import org.springframework.data.redis.connection.stream.*
-import org.springframework.data.redis.hash.*
-import org.springframework.data.redis.serializer.*
 import org.springframework.data.redis.stream.*
-import org.springframework.data.redis.stream.Subscription
 import org.springframework.util.*
-import java.time.*
 
 /**
  * <p>
@@ -48,98 +43,19 @@ class ListenerErrorHandler : ErrorHandler {
 }
 
 @Configuration
-class SubscriptionConfig(
-    @Autowired
-    override var redisStreamUtil: RedisStreamUtil
-) : AbsSubscriptionConfig() {
+class SubscriptionConfig : AbsSubscriptionConfig() {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
     fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<String, ObjectRecord<String, User>> {
-        val serializer = RedisSerializer.string()
-        val options = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
-            .builder()
-            .keySerializer(serializer)
-            .hashKeySerializer<String, String>(serializer)
-            .hashValueSerializer<String, String>(serializer)
-            .pollTimeout(Duration.ofSeconds(1))
-            .serializer(StringRedisSerializer())
-            .objectMapper(ObjectHashMapper())
-            .errorHandler(ListenerErrorHandler())
-            .targetType(User::class.java)
-            .build()
+        val container = createStreamContainer<User>(factory, null)
 
-        val container: StreamMessageListenerContainer<String, ObjectRecord<String, User>> =
-            StreamMessageListenerContainer.create(factory, options)
+        val keySimple = KeySimple("test")
+        container.registrySubscription(ListenerMessage1(), keySimple)
+        container.registrySubscription(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer1, "test")
+        container.registrySubscription(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer2, "test")
+        container.registrySubscription(ListenerMessage3(), keySimple)
+        container.registrySubscription(ListenerMessage3(), MqConst.stream1, MqConst.group2, MqConst.consumer2, "test")
 
-//        container.registrySubscription(
-//            ListenerMessage1(), MqConst.stream1,
-//            MqConst.group2,
-//            MqConst.consumer2
-//        )
         return container
-    }
-
-    @Autowired
-    lateinit var userMsgListenerContainer: StreamMessageListenerContainer<String, ObjectRecord<String, User>>
-
-    /**
-     * 订阅者1，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费
-     */
-    @Bean
-    fun subscription(listenerMessage: ListenerMessage1): Subscription {
-        return listenerMessage.registrySubscription(
-            userMsgListenerContainer, MqConst.stream1,
-            MqConst.group2,
-            MqConst.consumer2
-        )
-    }
-
-    /**
-     * 订阅者2，消费组group1，收到消息后自动确认，与订阅者1为竞争关系，消息仅被其中一个消费
-     */
-    @Bean
-    fun subscription2(
-        listenerMessage: ListenerMessage2
-    ): Subscription {
-        return listenerMessage.registrySubscription(
-            userMsgListenerContainer,
-            MqConst.stream1,
-            MqConst.group2,
-            MqConst.consumer2
-        )
-    }
-
-    /**
-     * 订阅者3，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费
-     */
-    @Bean
-    fun subscription3(
-        listenerMessage: ListenerMessage3
-    ): Subscription {
-        return listenerMessage.registrySubscription(
-            userMsgListenerContainer,
-            MqConst.stream1,
-            MqConst.group2,
-            MqConst.consumer3
-        )
-    }
-
-    /**
-     * 订阅者3，消费组group2，收到消息后不自动确认，需要用户选择合适的时机确认，与订阅者1和2非竞争关系，即使消息被订阅者1或2消费，亦可消费
-     *
-     * 当某个消息被ACK，PEL列表就会减少
-     * 如果忘记确认（ACK），则PEL列表会不断增长占用内存
-     * 如果服务器发生意外，重启连接后将再次收到PEL中的消息ID列表
-     */
-    @Bean
-    fun subscription4(
-        listenerMessage: ListenerMessage2
-    ): Subscription {
-        return listenerMessage.registrySubscription(
-            userMsgListenerContainer,
-            MqConst.stream1,
-            MqConst.group2,
-            MqConst.consumer1
-        )
     }
 }

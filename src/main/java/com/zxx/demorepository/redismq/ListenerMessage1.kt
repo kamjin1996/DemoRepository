@@ -1,18 +1,16 @@
 package com.zxx.demorepository.redismq
 
 import com.zxx.demorepository.redismq.config.*
-import org.springframework.beans.factory.annotation.*
 import org.springframework.data.redis.connection.stream.*
-import org.springframework.data.redis.stream.*
 import org.springframework.stereotype.*
 
 /**
  * redis stream监听消息
  */
 @Component
-class ListenerMessage1 : StreamListener<String, ObjectRecord<String, User>> {
+class ListenerMessage1 : AbsStreamMessageListener<User>() {
 
-    override fun onMessage(message: ObjectRecord<String, User>) {
+    override fun onMessage0(message: ObjectRecord<String, User>) {
         // 接收到消息
         println("ListenerMessage1---")
         println("message id " + message.id)
@@ -27,9 +25,9 @@ class ListenerMessage1 : StreamListener<String, ObjectRecord<String, User>> {
  * 在消费完成后确认已消费
  */
 @Component
-class ListenerMessage2 : StreamListener<String, ObjectRecord<String, User>> {
+class ListenerMessage2 : AbsStreamMessageListener<User>() {
 
-    override fun onMessage(message: ObjectRecord<String, User>) {
+    override fun onMessage0(message: ObjectRecord<String, User>) {
         val stream = message.stream ?: return
 
         // 接收到消息
@@ -49,12 +47,9 @@ class ListenerMessage2 : StreamListener<String, ObjectRecord<String, User>> {
  * 在确认已消费后再尝试消费
  */
 @Component
-class ListenerMessage3 : StreamListener<String,ObjectRecord<String, User>> {
+class ListenerMessage3 : AbsStreamMessageListener<User>() {
 
-    @Autowired
-    lateinit var redisStreamUtil: RedisStreamUtil
-
-    override fun onMessage(message: ObjectRecord<String, User>) {
+    override fun onMessage0(message: ObjectRecord<String, User>) {
         val stream = message.stream ?: return
 
         // 接收到消息
@@ -63,8 +58,5 @@ class ListenerMessage3 : StreamListener<String,ObjectRecord<String, User>> {
         println("stream " + stream)
         println("body " + message.value)
         println("---ListenerMessage3")
-
-        // 消费完成后确认消费（ACK）
-        redisStreamUtil.ack(stream, MqConst.group1, message.id)
     }
 }

@@ -1,14 +1,11 @@
 package com.zxx.demorepository.redismq.config
 
-import cn.hutool.core.bean.*
-import org.springframework.beans.factory.annotation.*
+import com.zxx.demorepository.utils.*
 import org.springframework.data.redis.connection.stream.*
 import org.springframework.data.redis.core.*
-import org.springframework.stereotype.*
 import io.lettuce.core.RedisCommandExecutionException
 
 import io.lettuce.core.RedisBusyException
-import org.checkerframework.checker.units.qual.*
 import org.slf4j.*
 
 import org.springframework.data.redis.RedisSystemException
@@ -17,13 +14,11 @@ import org.springframework.data.redis.RedisSystemException
 /**
  * 该组件是对redis stream命令的一些实现，可单独使用
  */
-@Component
-class RedisStreamUtil {
-
-    @Autowired
-    lateinit var redisTemplate: StringRedisTemplate
+object RedisStreamUtil {
 
     private val log = LoggerFactory.getLogger(RedisStreamUtil::class.java)
+
+    val redisTemplate by lazy { SpringContextHolder.getBean<StringRedisTemplate>() }
 
     /**
      * 创建消费组

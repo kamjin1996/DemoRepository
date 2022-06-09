@@ -8,16 +8,17 @@ import org.springframework.stereotype.*
  * redis stream监听消息
  */
 @Component
-class ListenerMessage1 : AbsStreamMessageListener<User>() {
+class ListenerMessage1 : AbsStreamMessageListener<User>(User::class.java) {
 
-    override fun onMessage0(message: ObjectRecord<String, User>) {
+    override fun onMessage0(message: User, messageId: String) {
         // 接收到消息
         println("ListenerMessage1---")
-        println("message id " + message.id)
-        println("stream " + message.stream)
-        println("body " + message.value) //TODO debug string not case user
+        println("message id " + messageId)
+        println("stream " + stream)
+        println("body " + message) //TODO debug string not case user
         println("---ListenerMessage1")
     }
+
 }
 
 /**
@@ -25,20 +26,15 @@ class ListenerMessage1 : AbsStreamMessageListener<User>() {
  * 在消费完成后确认已消费
  */
 @Component
-class ListenerMessage2 : AbsStreamMessageListener<User>() {
+class ListenerMessage2 : AbsStreamMessageListener<User>(User::class.java) {
 
-    override fun onMessage0(message: ObjectRecord<String, User>) {
-        val stream = message.stream ?: return
-
+    override fun onMessage0(message: User, messageId: String) {
         // 接收到消息
-        println("ListenerMessage2---")
-        println("message id " + message.id)
+        println("ListenerMessage1---")
+        println("message id " + messageId)
         println("stream " + stream)
-        println("body " + message.value)
-        println("---ListenerMessage2")
-
-        // 消费完成后确认消费（ACK）
-        //redisStreamUtil.ack(stream, MqConst.group1, message.id)
+        println("body " + message) //TODO debug string not case user
+        println("---ListenerMessage1")
     }
 }
 
@@ -47,16 +43,15 @@ class ListenerMessage2 : AbsStreamMessageListener<User>() {
  * 在确认已消费后再尝试消费
  */
 @Component
-class ListenerMessage3 : AbsStreamMessageListener<User>() {
+class ListenerMessage3 : AbsStreamMessageListener<User>(User::class.java) {
 
-    override fun onMessage0(message: ObjectRecord<String, User>) {
-        val stream = message.stream ?: return
+    override fun onMessage0(message: User, messageId: String) {
 
         // 接收到消息
         println("ListenerMessage3---")
-        println("message id " + message.id)
+        println("message id " + messageId)
         println("stream " + stream)
-        println("body " + message.value)
+        println("body " + message)
         println("---ListenerMessage3")
     }
 }

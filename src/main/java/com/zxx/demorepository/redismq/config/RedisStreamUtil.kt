@@ -76,7 +76,7 @@ object RedisStreamUtil {
      * 追加消息
      */
     fun add(content: Record<String, Any?>): String? {
-        return redisTemplate.opsForStream<String, Any?>().add(content)?.value
+        return redisTemplate.opsForStream<Any, Any?>().add(content)?.value
     }
 
     /**

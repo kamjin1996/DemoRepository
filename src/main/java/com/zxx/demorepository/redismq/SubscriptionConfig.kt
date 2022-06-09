@@ -45,17 +45,15 @@ class ListenerErrorHandler : ErrorHandler {
 @Configuration
 class SubscriptionConfig : AbsSubscriptionConfig() {
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<String, ObjectRecord<String, User>> {
-        val container = createStreamContainer<User>(factory, null)
-
-        val keySimple = KeySimple("test")
-        container.registrySubscription(ListenerMessage1(), keySimple)
-        container.registrySubscription(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer1, "test")
-        container.registrySubscription(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer2, "test")
-        container.registrySubscription(ListenerMessage3(), keySimple)
-        container.registrySubscription(ListenerMessage3(), MqConst.stream1, MqConst.group2, MqConst.consumer2, "test")
-
-        return container
+    @Bean
+    fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<String, ObjectRecord<String, String>> {
+        return createStreamContainer(factory, null) {
+            val keySimple = KeySimple("test")
+            this.registryListener(ListenerMessage1(), keySimple)
+            this.registryListener(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer1, "test")
+            this.registryListener(ListenerMessage2(), MqConst.stream1, MqConst.group1, MqConst.consumer2, "test")
+            this.registryListener(ListenerMessage3(), keySimple)
+            this.registryListener(ListenerMessage3(), MqConst.stream1, MqConst.group2, MqConst.consumer2, "test")
+        }
     }
 }

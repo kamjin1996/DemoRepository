@@ -1,13 +1,16 @@
 package com.zxx.demorepository.redismq
 
 import com.zxx.demorepository.redismq.config.*
+import org.slf4j.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
 import org.springframework.data.redis.connection.*
 import org.springframework.data.redis.connection.stream.*
+import org.springframework.data.redis.hash.*
 import org.springframework.data.redis.serializer.*
 import org.springframework.data.redis.stream.*
 import org.springframework.data.redis.stream.Subscription
+import org.springframework.util.*
 import java.time.*
 
 /**
@@ -34,7 +37,15 @@ object MqConst {
     const val consumer3 = "consumer3"
 }
 
-typealias Container = StreamMessageListenerContainer<String, *>
+class ListenerErrorHandler : ErrorHandler {
+
+    val log = LoggerFactory.getLogger(ListenerErrorHandler::class.java)
+
+    override fun handleError(p0: Throwable) {
+        log.error("stream传输发生错误，", p0)
+    }
+
+}
 
 @Configuration
 class SubscriptionConfig(
@@ -42,21 +53,34 @@ class SubscriptionConfig(
     override var redisStreamUtil: RedisStreamUtil
 ) : AbsSubscriptionConfig() {
 
-    @Bean
-    fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<*, *> {
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    fun userMsgListenerContainer(factory: RedisConnectionFactory): StreamMessageListenerContainer<String, ObjectRecord<String, User>> {
+        val serializer = RedisSerializer.string()
         val options = StreamMessageListenerContainer.StreamMessageListenerContainerOptions
             .builder()
+            .keySerializer(serializer)
+            .hashKeySerializer<String, String>(serializer)
+            .hashValueSerializer<String, String>(serializer)
             .pollTimeout(Duration.ofSeconds(1))
             .serializer(StringRedisSerializer())
+            .objectMapper(ObjectHashMapper())
+            .errorHandler(ListenerErrorHandler())
+            .targetType(User::class.java)
             .build()
-        val container: StreamMessageListenerContainer<*, *> =
+
+        val container: StreamMessageListenerContainer<String, ObjectRecord<String, User>> =
             StreamMessageListenerContainer.create(factory, options)
-        container.start()
+
+//        container.registrySubscription(
+//            ListenerMessage1(), MqConst.stream1,
+//            MqConst.group2,
+//            MqConst.consumer2
+//        )
         return container
     }
 
     @Autowired
-    lateinit var userMsgListenerContainer: StreamMessageListenerContainer<String, MapRecord<String,String,User>>
+    lateinit var userMsgListenerContainer: StreamMessageListenerContainer<String, ObjectRecord<String, User>>
 
     /**
      * 订阅者1，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费

@@ -1,6 +1,5 @@
 package com.zxx.demorepository.redismq
 
-import cn.hutool.json.*
 import com.zxx.demorepository.redismq.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.redis.connection.stream.*
@@ -11,14 +10,14 @@ import org.springframework.stereotype.*
  * redis stream监听消息
  */
 @Component
-class ListenerMessage1 : StreamListener<String, MapRecord<String, String, User>> {
+class ListenerMessage1 : StreamListener<String, ObjectRecord<String, User>> {
 
-    override fun onMessage(message: MapRecord<String, String, User>) {
+    override fun onMessage(message: ObjectRecord<String, User>) {
         // 接收到消息
         println("ListenerMessage1---")
         println("message id " + message.id)
         println("stream " + message.stream)
-        println("body " + message.value)
+        println("body " + message.value) //TODO debug string not case user
         println("---ListenerMessage1")
     }
 }
@@ -28,9 +27,9 @@ class ListenerMessage1 : StreamListener<String, MapRecord<String, String, User>>
  * 在消费完成后确认已消费
  */
 @Component
-class ListenerMessage2 : StreamListener<String, MapRecord<String, String, User>> {
+class ListenerMessage2 : StreamListener<String, ObjectRecord<String, User>> {
 
-    override fun onMessage(message: MapRecord<String, String, User>) {
+    override fun onMessage(message: ObjectRecord<String, User>) {
         val stream = message.stream ?: return
 
         // 接收到消息
@@ -50,12 +49,12 @@ class ListenerMessage2 : StreamListener<String, MapRecord<String, String, User>>
  * 在确认已消费后再尝试消费
  */
 @Component
-class ListenerMessage3 : StreamListener<String, MapRecord<String, String, User>> {
+class ListenerMessage3 : StreamListener<String,ObjectRecord<String, User>> {
 
     @Autowired
     lateinit var redisStreamUtil: RedisStreamUtil
 
-    override fun onMessage(message: MapRecord<String, String, User>) {
+    override fun onMessage(message: ObjectRecord<String, User>) {
         val stream = message.stream ?: return
 
         // 接收到消息
